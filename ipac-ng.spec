@@ -21,12 +21,13 @@ Group(sv):	N‰tverk/Demoner
 Group(uk):	Ì≈“≈÷¡/‰≈ÕœŒ…
 URL:		http://sourceforge.net/projects/ipac-ng/
 Source0:	http://prdownloads.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
-Patch0:		ipac-ng-pld.patch
+Patch0:		%{name}-pld.patch
+Patch1:		%{name}-postgresql.patch
 BuildRequires:	autoconf
 BuildRequires:	byacc
 BuildRequires:	gdbm-devel
 BuildRequires:	perl
-BuildRequires:  postgresql-devel
+BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	openssl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -50,6 +51,7 @@ jako tekst ASCII lub obrazki z wykresami.
 %setup -q -n %{name}-%{version}
 
 %patch0 -p0
+%patch1 -p1
 
 %build
 autoconf
