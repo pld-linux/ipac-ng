@@ -1,2 +1,2 @@
-*/5 * * * *	root /usr/sbin/fetchipac
+*/5 * * * *	root umask 022; /usr/sbin/fetchipac
 
