@@ -37,16 +37,18 @@ text and/or images with graphs.
 
 %prep
 %setup -q -n %{name}-%{version}
-autoconf
-%configure \
-	--enable-classic=no 
 
 %build
-%{__make} DESTDIR=$RPM_BUILD_ROOT all
+autoconf
+%configure \
+	--enable-classic=no
+
+%{__make} all
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},/var/www/cgi-bin,/var/www/html/stat,/var/lib/ipac}
 
@@ -59,8 +61,7 @@ touch $RPM_BUILD_ROOT/var/lib/ipac/flag
 gzip -9nf README README-NG README-NG.RUS postgre.readme
 
 %clean
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
-rm -rf $RPM_BUILD_DIR/%{name}-%{version}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
