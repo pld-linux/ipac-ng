@@ -1,0 +1,18 @@
+diff -urN ipac-ng-1.27.org/configure.in ipac-ng-1.27/configure.in
+--- ipac-ng-1.27.org/configure.in	2003-09-04 13:39:54.000000000 +0200
++++ ipac-ng-1.27/configure.in	2003-09-04 13:40:41.000000000 +0200
+@@ -46,6 +46,14 @@
+ AC_PATH_PROG(MKTEMP,mktemp,,$MYPATH)
+ AC_PATH_PROGS(PERL,perl5 perl,,$MYPATH)
+ 
++if test x$IPCHAINS = x; then
++    IPCHAINS="/usr/sbin/ipchains"
++fi
++
++if test x$IPTABLES = x; then
++    IPTABLES="/usr/sbin/iptables"
++fi
++
+ AC_DEFINE_UNQUOTED(IPCHAINS,"$IPCHAINS")
+ AC_SUBST(IPCHAINS)
+ 
