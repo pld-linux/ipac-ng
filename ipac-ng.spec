@@ -40,7 +40,7 @@ jako tekst ASCII lub obrazki z wykresami.
 #%patch1 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure \
 	--enable-classic=no
 
