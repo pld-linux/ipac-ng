@@ -11,6 +11,8 @@ URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	byacc
+# either ipchains or iptables
+BuildRequires:	firewall-userspace-tool
 BuildRequires:	gdbm-devel
 BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	perl
