@@ -38,7 +38,7 @@ ipac to pakiet przeznaczony do zbierania, podliczania i ³adnego
 przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami.
 
-%package -n %{name}-cgi
+%package cgi
 Summary:	IP accounting package for Linux - CGI scripts
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP - skrypty CGI
 Group:		Networking/Daemons
@@ -48,12 +48,12 @@ Requires:	perl-DBI
 Requires:	perl-GD
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description -n %{name}-cgi
+%description cgi
 ipac is a package which is designed to gather, summarize and nicely
 output the IP accounting data. ipac make summaries and graphs as ascii
 text and/or images with graphs. CGI scripts for web wisualisation.
 
-%description -l pl -n %{name}-cgi
+%description cgi -l pl
 ipac to pakiet przeznaczony do zbierania, podliczania i ³adnego
 przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami. Skrypty CGI do wizualizacji
