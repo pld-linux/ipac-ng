@@ -3,23 +3,25 @@
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
-Version:	1.28
+Version:	1.30
 Release:	1
 Epoch:		0
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
-# Source0-md5:	e3c704779c26ec541bffa7f8f53cf3c9
+# Source0-md5:	89eab6631528b1a946e7b9dec6ee8799
+# Source0-size:	159033
 Source1:	%{name}.init
 Source2:	%{name}.cron
 Patch0:		%{name}-hardcode-path.patch
 URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gdbm-devel
 BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	perl
+BuildRequires:	perl-base
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	rpm-perlprov >= 3.0.3-16
@@ -90,7 +92,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc/* contrib/* CHANGELOG TODO
+%doc doc/* contrib/* CHANGELOG README TODO
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %config(noreplace) %verify(not size mtime md5) %attr(640,root,root) /etc/cron.d/%{name}
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
