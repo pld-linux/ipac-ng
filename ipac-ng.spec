@@ -13,7 +13,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	gdbm-devel
-BuildRequires:	openssl-devel >= 0.9.6k
+BuildRequires:	openssl-devel >= 0.9.6m
 BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
