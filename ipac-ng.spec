@@ -56,13 +56,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 %description cgi
 ipac is a package which is designed to gather, summarize and nicely
 output the IP accounting data. ipac make summaries and graphs as ascii
-text and/or images with graphs. CGI scripts for web wisualisation.
+text and/or images with graphs. CGI scripts for web visualisation.
 
 %description cgi -l pl
 ipac to pakiet przeznaczony do zbierania, podliczania i ³adnego
 przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami. Skrypty CGI do wizualizacji
-statystyk na stroanch WWW.
+statystyk na stronach WWW.
 
 %prep
 %setup -q -n %{name}-1.27
