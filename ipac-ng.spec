@@ -15,15 +15,11 @@ BuildRequires:	flex
 # either ipchains or iptables
 BuildRequires:	firewall-userspace-tool
 BuildRequires:	gdbm-devel
-BuildRequires:	openssl-devel >= 0.9.7
+BuildRequires:	openssl-devel >= 0.9.6j
 BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:  rpm-perlprov >= 3.0.3-16
-# perlprov doesn't catch these
-Requires:	perl-CGI
-Requires:	perl-DBI
-Requires:	perl-GD
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
@@ -39,6 +35,27 @@ text and/or images with graphs.
 ipac to pakiet przeznaczony do zbierania, podliczania i ³adnego
 przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami.
+
+%package -n %{name}-cgi
+Summary:        IP accounting package for Linux - CGI scripts
+Summary(pl):    Pakiet zbieraj±cy informacje o ruchu IP - skrypty CGI
+Group:		Networking/Daemons
+# perlprov doesn't catch these
+Requires:	perl-CGI
+Requires:	perl-DBI
+Requires:	perl-GD
+%requires_eq	%{name}
+
+%description -n %{name}-cgi
+ipac is a package which is designed to gather, summarize and nicely
+output the IP accounting data. ipac make summaries and graphs as ascii
+text and/or images with graphs. CGI scripts for web wisualisation.
+
+%description -l pl -n %{name}-cgi
+ipac to pakiet przeznaczony do zbierania, podliczania i ³adnego
+przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
+jako tekst ASCII lub obrazki z wykresami. Skrypty CGI do wizualizacji
+statystyk na stroanch WWW.
 
 %prep
 %setup -q
@@ -75,11 +92,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/ipac.conf
 %attr(755,root,root) %{_sbindir}/ipac*
 %attr(755,root,root) %{_sbindir}/fetchipac
+%dir /var/lib/ipac
+%attr(664,http,http) /var/lib/ipac/flag
+%{_mandir}/man?/*
+
+%files -n %{name}-cgi
+%dir %{_cgidir}
+%dir %{_htmldir}
 %attr(644,http,http) %{_htmldir}/index.html
 %attr(644,root,root) %{_cgidir}/.htaccess
 %attr(755,root,root) %{_cgidir}/*
-%attr(664,http,http) /var/lib/ipac/flag
-%dir /var/lib/ipac
-%dir %{_cgidir}
-%dir %{_htmldir}
-%{_mandir}/man?/*
