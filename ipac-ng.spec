@@ -9,6 +9,7 @@ Group:		Networking/Daemons
 URL:		http://sourceforge.net/projects/ipac-ng/
 Source0:	http://prdownloads.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	byacc
 BuildRequires:	gdbm-devel
 BuildRequires:	perl
