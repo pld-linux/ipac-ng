@@ -29,6 +29,7 @@ BuildRequires:	perl-base
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	rpm-perlprov >= 3.0.3-16
+BuildRequires:	rpmbuild(macros) >= 1.176
 BuildRequires:	sqlite-devel
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
@@ -87,7 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 if [ -f /var/lock/subsys/ipac-ng ]; then
 	/etc/rc.d/init.d/ipac-ng restart 1>&2
 else
-	echo "Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules."
+	%banner %{name} -e << EOF
+Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules.
+EOF
 fi
 
 %preun
