@@ -19,7 +19,7 @@ BuildRequires:	openssl-devel >= 0.9.6j
 BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
-BuildRequires:  rpm-perlprov >= 3.0.3-16
+BuildRequires:	rpm-perlprov >= 3.0.3-16
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
@@ -37,8 +37,8 @@ przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami.
 
 %package -n %{name}-cgi
-Summary:        IP accounting package for Linux - CGI scripts
-Summary(pl):    Pakiet zbieraj±cy informacje o ruchu IP - skrypty CGI
+Summary:	IP accounting package for Linux - CGI scripts
+Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP - skrypty CGI
 Group:		Networking/Daemons
 # perlprov doesn't catch these
 Requires:	perl-CGI
