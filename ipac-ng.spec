@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 if [ -f /var/lock/subsys/ipac-ng ]; then
 	/etc/rc.d/init.d/ipac-ng restart 1>&2
 else
-	%banner %{name} -e << EOF
+	%banner %{name} -e <<EOF
 Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules.
 EOF
 fi
