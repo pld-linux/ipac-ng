@@ -1,4 +1,4 @@
-# _with_default_ipchains	- use ipchains as default accouting agent
+%bcond_with default_ipchains	# use ipchains as default accouting agent
 %include        /usr/lib/rpm/macros.perl
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
@@ -78,7 +78,7 @@ statystyk na stroanch WWW.
 	--enable-classic=no \
 	--enable-default-access=files \
 	--enable-default-storage=gdbm \
-	--enable-default-agent=%{?_with_default_ipchains:ipchains}%{!?_with_default_ipchains:iptables}
+	--enable-default-agent=%{?with_default_ipchains:ipchains}%{!?with_default_ipchains:iptables}
 %{__make} all
 
 %install
@@ -90,7 +90,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,cron.d}
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_htmldir},%{_cgidir},/var/lib/ipac}
 
 install contrib/sample_configs/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
-install contrib/sample_configs/rules.conf.%{?_with_default_ipchains:ipchains}%{!?_with_default_ipchains:iptables} $RPM_BUILD_ROOT%{_sysconfdir}/rules.conf
+install contrib/sample_configs/rules.conf.%{?with_default_ipchains:ipchains}%{!?with_default_ipchains:iptables} $RPM_BUILD_ROOT%{_sysconfdir}/rules.conf
 
 sed -e s'#/cgi-bin/#/cgi-bin/stat/#g' html/stat/index.html > $RPM_BUILD_ROOT%{_htmldir}/index.html
 install html/cgi-bin/.htaccess $RPM_BUILD_ROOT%{_cgidir}/.htaccess
