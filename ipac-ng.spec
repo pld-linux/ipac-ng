@@ -3,11 +3,13 @@ Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
 Version:	1.27
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
 # Source0-md5:	dc9a9faa78b5f9bc1f92eeb13b7518c0
+Source1:	%{name}.init
+Source2:	%{name}.cron
 URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -44,7 +46,7 @@ Group:		Networking/Daemons
 Requires:	perl-CGI
 Requires:	perl-DBI
 Requires:	perl-GD
-%requires_eq	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description -n %{name}-cgi
 ipac is a package which is designed to gather, summarize and nicely
@@ -75,6 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,cron.d}
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_htmldir},%{_cgidir},/var/lib/ipac}
 
 install contrib/sample_configs/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
@@ -83,12 +86,33 @@ install html/cgi-bin/.htaccess $RPM_BUILD_ROOT%{_cgidir}/.htaccess
 install html/cgi-bin/* $RPM_BUILD_ROOT%{_cgidir}
 touch $RPM_BUILD_ROOT/var/lib/ipac/flag
 
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/cron.d/%{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+/sbin/chkconfig --add ipac-ng
+if [ -f /var/lock/subsys/ipac-ng ]; then
+        /etc/rc.d/init.d/ipac-ng restart 1>&2
+else
+        echo "Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules."
+fi
+
+%preun
+if [ "$1" = "0" ]; then
+        if [ -f /var/lock/subsys/ipac-ng ]; then
+                /etc/rc.d/init.d/ipac-ng stop 1>&2
+        fi
+        /sbin/chkconfig --del ipac-ng
+fi
 
 %files
 %defattr(644,root,root,755)
 %doc README README-NG README-NG.RUS postgre.readme contrib/* ipac-ng.sql
+%attr(754,root,root) /etc/rc.d/init.d/%{name}
+%config(noreplace) %verify(not size mtime md5) %attr(640,root,root) /etc/cron.d/%{name}
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/ipac.conf
 %attr(755,root,root) %{_sbindir}/ipac*
 %attr(755,root,root) %{_sbindir}/fetchipac
