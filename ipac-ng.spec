@@ -1,15 +1,18 @@
-%bcond_with default_ipchains	# use ipchains as default accouting agent
-%include        /usr/lib/rpm/macros.perl
+#
+# Conditional build:
+%bcond_with	default_ipchains	# use ipchains as default accouting agent
+#
+%include	/usr/lib/rpm/macros.perl
+#
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
-Version:	1.30
+Version:	1.31
 Release:	1
-Epoch:		0
-License:	GPL
+License:	GPL v2
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
-# Source0-md5:	89eab6631528b1a946e7b9dec6ee8799
+# Source0-md5:	f9ed8a729145ae613b3cdc518f1750e3
 # Source0-size:	159033
 Source1:	%{name}.init
 Source2:	%{name}.cron
@@ -20,11 +23,13 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gdbm-devel
+BuildRequires:	mysql-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	perl-base
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	rpm-perlprov >= 3.0.3-16
+BuildRequires:	sqlite-devel
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Obsoletes:	ipac-ng-cgi
@@ -49,10 +54,12 @@ jako tekst ASCII lub obrazki z wykresami.
 %build
 %{__aclocal}
 %{__autoconf}
+
 %configure \
 	--enable-default-access=files \
 	--enable-default-storage=gdbm \
 	--enable-default-agent=%{?with_default_ipchains:ipchains}%{!?with_default_ipchains:iptables}
+
 %{__make} -j1
 
 %install
