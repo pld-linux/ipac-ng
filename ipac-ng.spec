@@ -12,7 +12,6 @@ URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-BuildRequires:	ipchains
 BuildRequires:	gdbm-devel
 BuildRequires:	openssl-devel >= 0.9.6j
 BuildRequires:	perl
