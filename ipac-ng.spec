@@ -1,8 +1,8 @@
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
-Version:	1.19
-Release:	0.2
+Version:	1.20
+Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Group(cs):	SÌªovÈ/DÈmoni
@@ -21,10 +21,12 @@ Group(sv):	N‰tverk/Demoner
 Group(uk):	Ì≈“≈÷¡/‰≈ÕœŒ…
 URL:		http://sourceforge.net/projects/ipac-ng/
 Source0:	http://prdownloads.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
+Patch0:		ipac-ng-pld.patch
 BuildRequires:	autoconf
 BuildRequires:	byacc
 BuildRequires:	gdbm-devel
 BuildRequires:	perl
+BuildRequires:  postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	openssl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -46,6 +48,8 @@ jako tekst ASCII lub obrazki z wykresami.
 
 %prep
 %setup -q -n %{name}-%{version}
+
+%patch0 -p0
 
 %build
 autoconf
