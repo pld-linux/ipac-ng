@@ -3,13 +3,13 @@
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
-Version:	1.27
-Release:	3
+Version:	1.27pl1
+Release:	1
 Epoch:		0
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
-# Source0-md5:	dc9a9faa78b5f9bc1f92eeb13b7518c0
+# Source0-md5:	9ac8ded2b1690605017d41da04a7d90f
 Source1:	%{name}.init
 Source2:	%{name}.cron
 Patch0:		%{name}-hardcode-path.patch
@@ -64,7 +64,7 @@ jako tekst ASCII lub obrazki z wykresami. Skrypty CGI do wizualizacji
 statystyk na stroanch WWW.
 
 %prep
-%setup -q
+%setup -q -n %{name}-1.27
 %patch0 -p1
 %patch1 -p1
 
