@@ -22,6 +22,8 @@ BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	rpm-perlprov >= 3.0.3-16
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
@@ -97,17 +99,17 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/chkconfig --add ipac-ng
 if [ -f /var/lock/subsys/ipac-ng ]; then
-        /etc/rc.d/init.d/ipac-ng restart 1>&2
+	/etc/rc.d/init.d/ipac-ng restart 1>&2
 else
-        echo "Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules."
+	echo "Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/ipac-ng ]; then
-                /etc/rc.d/init.d/ipac-ng stop 1>&2
-        fi
-        /sbin/chkconfig --del ipac-ng
+	if [ -f /var/lock/subsys/ipac-ng ]; then
+		/etc/rc.d/init.d/ipac-ng stop 1>&2
+	fi
+	/sbin/chkconfig --del ipac-ng
 fi
 
 %files
@@ -123,6 +125,7 @@ fi
 %{_mandir}/man?/*
 
 %files -n %{name}-cgi
+%defattr(644,root,root,755)
 %dir %{_cgidir}
 %dir %{_htmldir}
 %attr(644,http,http) %{_htmldir}/index.html
