@@ -13,10 +13,10 @@ License:	GPL v2
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
 # Source0-md5:	f9ed8a729145ae613b3cdc518f1750e3
-# Source0-size:	159033
 Source1:	%{name}.init
 Source2:	%{name}.cron
 Patch0:		%{name}-hardcode-path.patch
+Patch1:		%{name}-gcc4.patch
 URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -50,6 +50,7 @@ jako tekst ASCII lub obrazki z wykresami.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__aclocal}
