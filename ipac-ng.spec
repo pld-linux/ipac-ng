@@ -81,6 +81,8 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,cron.d}
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_htmldir},%{_cgidir},/var/lib/ipac}
 
 install contrib/sample_configs/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
+install contrib/sample_configs/rules.conf.iptables $RPM_BUILD_ROOT%{_sysconfdir}/rules.conf
+
 sed -e s'#/cgi-bin/#/cgi-bin/stat/#g' html/stat/index.html > $RPM_BUILD_ROOT%{_htmldir}/index.html
 install html/cgi-bin/.htaccess $RPM_BUILD_ROOT%{_cgidir}/.htaccess
 install html/cgi-bin/* $RPM_BUILD_ROOT%{_cgidir}
@@ -113,7 +115,7 @@ fi
 %doc README README-NG README-NG.RUS postgre.readme contrib/* ipac-ng.sql
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %config(noreplace) %verify(not size mtime md5) %attr(640,root,root) /etc/cron.d/%{name}
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/ipac.conf
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
 %attr(755,root,root) %{_sbindir}/ipac*
 %attr(755,root,root) %{_sbindir}/fetchipac
 %dir /var/lib/ipac
