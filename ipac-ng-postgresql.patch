@@ -1,0 +1,36 @@
+diff -urN ipac-ng-1.20/storage/postgre/postgre.c ipac-ng-1.20.dzikus/storage/postgre/postgre.c
+--- ipac-ng-1.20/storage/postgre/postgre.c	Thu Jan 24 08:43:33 2002
++++ ipac-ng-1.20.dzikus/storage/postgre/postgre.c	Thu Feb 21 16:43:04 2002
+@@ -32,7 +32,7 @@
+ #include <stdlib.h>
+ #include <sys/param.h>
+ #include <unistd.h>
+-#include <postgres.h>
++#include <postgresql/server/postgres.h>
+ #include <libpq-fe.h>
+ 
+ //#define DEBUG_POST
+diff -urN ipac-ng-1.20/access/postg/postg.c ipac-ng-1.20.dzikus/access/postg/postg.c
+--- ipac-ng-1.20/access/postg/postg.c	Thu Feb 14 06:46:23 2002
++++ ipac-ng-1.20.dzikus/access/postg/postg.c	Thu Feb 21 16:46:01 2002
+@@ -32,7 +32,7 @@
+ #include <stdlib.h>
+ #include <sys/param.h>
+ #include <unistd.h>
+-#include <postgres.h>
++#include <postgresql/server/postgres.h>
+ #include <libpq-fe.h>
+ 
+ //#define DEBUG_POST
+diff -urN ipac-ng-1.20/ipacd.c ipac-ng-1.20.dzikus/ipacd.c
+--- ipac-ng-1.20/ipacd.c	Fri Jan 18 15:46:54 2002
++++ ipac-ng-1.20.dzikus/ipacd.c	Thu Feb 21 16:48:31 2002
+@@ -52,7 +52,7 @@
+ 
+ #include "libipq.h"
+ 
+-#include <postgres.h>
++#include <postgresql/server/postgres.h>
+ #include <libpq-fe.h>
+ 
+ #include "config.h"
