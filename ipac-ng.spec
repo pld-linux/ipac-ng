@@ -1,3 +1,4 @@
+# _with_ipchains	- build ipchains version
 %include        /usr/lib/rpm/macros.perl
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
@@ -14,8 +15,6 @@ URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-# either ipchains or iptables
-BuildRequires:	firewall-userspace-tool
 BuildRequires:	gdbm-devel
 BuildRequires:	openssl-devel >= 0.9.6j
 BuildRequires:	perl
@@ -71,7 +70,8 @@ statystyk na stroanch WWW.
 	--enable-auth-server=127.0.0.1 \
 	--enable-classic=no \
 	--enable-default-access=files \
-	--enable-default-storage=gdbm
+	--enable-default-storage=gdbm \
+	--enable-default-agent=%{?_with_ipchains:ipchains}%{!?_with_ipchains:iptables}
 %{__make} all
 
 %install
@@ -83,7 +83,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,cron.d}
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_htmldir},%{_cgidir},/var/lib/ipac}
 
 install contrib/sample_configs/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
-install contrib/sample_configs/rules.conf.iptables $RPM_BUILD_ROOT%{_sysconfdir}/rules.conf
+install contrib/sample_configs/rules.conf.%{?_with_ipchains:ipchains}%{!?_with_ipchains:iptables} $RPM_BUILD_ROOT%{_sysconfdir}/rules.conf
 
 sed -e s'#/cgi-bin/#/cgi-bin/stat/#g' html/stat/index.html > $RPM_BUILD_ROOT%{_htmldir}/index.html
 install html/cgi-bin/.htaccess $RPM_BUILD_ROOT%{_cgidir}/.htaccess
