@@ -10,7 +10,7 @@
 . /etc/sysconfig/network
 
 # ipac-ng configuration
-. /etc/sysconfig/ipac-ng
+[ -f /etc/sysconfig/ipac-ng ] && . /etc/sysconfig/ipac-ng
 
 case "$1" in
   start)
