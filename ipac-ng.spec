@@ -25,7 +25,7 @@ BuildRequires:	postgresql-backend-devel
 BuildRequires:	rpm-perlprov >= 3.0.3-16
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
-Obsoletes:	%{name}-cgi
+Obsoletes:	ipac-ng-cgi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
