@@ -15,7 +15,7 @@ BuildRequires:	gdbm-devel
 BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:  rpm-perlprov >= 3.0.3-16
 # perlprov doesn't catch these
 Requires:	perl-CGI
