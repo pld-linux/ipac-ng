@@ -4,7 +4,7 @@ Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
 Version:	1.27pl1
-Release:	1
+Release:	2
 Epoch:		0
 License:	GPL
 Group:		Networking/Daemons
@@ -14,6 +14,7 @@ Source1:	%{name}.init
 Source2:	%{name}.cron
 Patch0:		%{name}-hardcode-path.patch
 Patch1:		%{name}-miscfix.patch
+Patch2:		%{name}-new-ipt.patch
 URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -67,6 +68,7 @@ statystyk na stroanch WWW.
 %setup -q -n %{name}-1.27
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__aclocal}
