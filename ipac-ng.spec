@@ -1,14 +1,13 @@
+%include        /usr/lib/rpm/macros.perl
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
-Version:	1.21
+Version:	1.22
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
 URL:		http://sourceforge.net/projects/ipac-ng/
 Source0:	http://prdownloads.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-pld.patch
-Patch1:		%{name}-postgresql.patch
 BuildRequires:	autoconf
 BuildRequires:	byacc
 BuildRequires:	gdbm-devel
@@ -16,6 +15,11 @@ BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
 BuildRequires:	openssl-devel
+BuildRequires:  rpm-perlprov >= 3.0.3-16
+# perlprov doesn't catch these
+Requires:	perl-CGI
+Requires:	perl-DBI
+Requires:	perl-GD
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
@@ -36,14 +40,14 @@ jako tekst ASCII lub obrazki z wykresami.
 %prep
 %setup -q -n %{name}-%{version}
 
-%patch0 -p0
-#%patch1 -p1
-
 %build
+%{__aclocal}
 %{__autoconf}
 %configure \
-	--enable-classic=no
-
+	--enable-auth-server=127.0.0.1 \
+	--enable-classic=no \
+	--enable-default-access=files \
+	--enable-default-storage=gdbm
 %{__make} all
 
 %install
@@ -54,20 +58,19 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_htmldir},%{_cgidir},/var/lib/ipac}
 
 install contrib/sample_configs/ipac-ng/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
-install html/stat/index.html $RPM_BUILD_ROOT%{_htmldir}/index.html
+sed -e s'#/cgi-bin/#/cgi-bin/stat/#g' html/stat/index.html > $RPM_BUILD_ROOT%{_htmldir}/index.html
 install html/cgi-bin/.htaccess $RPM_BUILD_ROOT%{_cgidir}/.htaccess
 install html/cgi-bin/* $RPM_BUILD_ROOT%{_cgidir}
 touch $RPM_BUILD_ROOT/var/lib/ipac/flag
-
-gzip -9nf README README-NG README-NG.RUS postgre.readme
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README README-NG README-NG.RUS postgre.readme contrib/* ipac-ng.sql
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/ipac.conf
-%attr(755,root,root) %{_sbindir}/ipacsum
+%attr(755,root,root) %{_sbindir}/ipac*
 %attr(755,root,root) %{_sbindir}/fetchipac
 %attr(644,http,http) %{_htmldir}/index.html
 %attr(644,root,root) %{_cgidir}/.htaccess
@@ -76,5 +79,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/lib/ipac
 %dir %{_cgidir}
 %dir %{_htmldir}
-%doc *.gz contrib/* ipac-ng.sql
-%{_mandir}/man8/*
+%{_mandir}/man?/*
