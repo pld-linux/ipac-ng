@@ -27,7 +27,6 @@ Requires:	perl-GD
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
-
 %define		_htmldir	/home/services/httpd/html/stat
 %define		_cgidir		/home/services/httpd/cgi-bin/stat
 
@@ -42,7 +41,7 @@ przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 %{__aclocal}
