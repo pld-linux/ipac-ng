@@ -7,6 +7,7 @@ Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
+# Source0-md5:	dc9a9faa78b5f9bc1f92eeb13b7518c0
 URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
