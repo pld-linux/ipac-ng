@@ -2,7 +2,7 @@
 Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
-Version:	1.22
+Version:	1.27
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
@@ -10,7 +10,7 @@ Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
 URL:		http://sourceforge.net/projects/ipac-ng/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	byacc
+BuildRequires:	flex
 # either ipchains or iptables
 BuildRequires:	firewall-userspace-tool
 BuildRequires:	gdbm-devel
@@ -60,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_htmldir},%{_cgidir},/var/lib/ipac}
 
-install contrib/sample_configs/ipac-ng/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
+install contrib/sample_configs/ipac.conf $RPM_BUILD_ROOT%{_sysconfdir}/ipac.conf
 sed -e s'#/cgi-bin/#/cgi-bin/stat/#g' html/stat/index.html > $RPM_BUILD_ROOT%{_htmldir}/index.html
 install html/cgi-bin/.htaccess $RPM_BUILD_ROOT%{_cgidir}/.htaccess
 install html/cgi-bin/* $RPM_BUILD_ROOT%{_cgidir}
