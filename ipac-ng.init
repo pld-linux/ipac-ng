@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# chkconfig:	2345 20 70
+# description:	IPAC-NG
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# ipac-ng configuration
+. /etc/sysconfig/ipac-ng
+
+case "$1" in
+  start)
+  	# starting multiple times is OK!
+	msg_starting ipac-ng
+	daemon /usr/sbin/fetchipac -S
+	touch /var/lock/subsys/ipac-ng
+	;;
+  stop)
+  	# there is no stop for ipac-ng
+	;;
+  status)
+  	# nothing
+	exit $?
+	;;
+  restart|force-reload)
+	$0 start
+	exit $?
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
+	;;
+esac
+
+exit 0
