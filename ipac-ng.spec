@@ -6,16 +6,16 @@ Version:	1.22
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
+Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
 URL:		http://sourceforge.net/projects/ipac-ng/
-Source0:	http://prdownloads.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	byacc
 BuildRequires:	gdbm-devel
+BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
-BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:  rpm-perlprov >= 3.0.3-16
 # perlprov doesn't catch these
 Requires:	perl-CGI
