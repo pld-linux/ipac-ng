@@ -25,8 +25,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _sysconfdir     /etc/%{name}
 
-%define		_htmldir	/home/httpd/html/stat
-%define		_cgidir		/home/httpd/cgi-bin/stat
+%define		_htmldir	/home/services/httpd/html/stat
+%define		_cgidir		/home/services/httpd/cgi-bin/stat
 
 %description
 ipac is a package which is designed to gather, summarize and nicely
