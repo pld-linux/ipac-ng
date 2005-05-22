@@ -105,8 +105,9 @@ fi
 %defattr(644,root,root,755)
 %doc doc/* contrib/* CHANGELOG README TODO
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
-%config(noreplace) %verify(not size mtime md5) %attr(640,root,root) /etc/cron.d/%{name}
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/cron.d/%{name}
+%dir %{_sysconfdir}
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %attr(755,root,root) %{_sbindir}/ipac*
 %attr(755,root,root) %{_sbindir}/fetchipac
 %dir /var/lib/ipac
