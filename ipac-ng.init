@@ -6,9 +6,6 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-# Source networking configuration.
-. /etc/sysconfig/network
-
 # ipac-ng configuration
 [ -f /etc/sysconfig/ipac-ng ] && . /etc/sysconfig/ipac-ng
 
