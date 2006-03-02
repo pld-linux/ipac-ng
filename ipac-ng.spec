@@ -27,13 +27,13 @@ BuildRequires:	gdbm-devel
 BuildRequires:	mysql-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	perl-base
-BuildRequires:	postgresql-devel
 BuildRequires:	postgresql-backend-devel
+BuildRequires:	postgresql-devel
 BuildRequires:	rpm-perlprov >= 3.0.3-16
-BuildRequires:	rpmbuild(macros) >= 1.176
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sqlite-devel
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 Obsoletes:	ipac-ng-cgi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -87,19 +87,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add ipac-ng
-if [ -f /var/lock/subsys/ipac-ng ]; then
-	/etc/rc.d/init.d/ipac-ng restart 1>&2
-else
-	%banner %{name} -e <<EOF
-Run \"/etc/rc.d/init.d/ipac-ng start\" to setup ipac-ng rules.
-EOF
-fi
+%service ipac-ng restart
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/ipac-ng ]; then
-		/etc/rc.d/init.d/ipac-ng stop 1>&2
-	fi
+	%service ipac-ng stop
 	/sbin/chkconfig --del ipac-ng
 fi
 
