@@ -8,7 +8,7 @@ Summary:	IP accounting package for Linux
 Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
 Name:		ipac-ng
 Version:	1.31
-Release:	5
+Release:	6
 License:	GPL v2
 Group:		Networking/Daemons
 Source0:	http://dl.sourceforge.net/ipac-ng/%{name}-%{version}.tar.bz2
