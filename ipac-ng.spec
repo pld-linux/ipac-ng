@@ -5,7 +5,7 @@
 %include	/usr/lib/rpm/macros.perl
 #
 Summary:	IP accounting package for Linux
-Summary(pl):	Pakiet zbieraj±cy informacje o ruchu IP
+Summary(pl.UTF-8):   Pakiet zbierajÄ…cy informacje o ruchu IP
 Name:		ipac-ng
 Version:	1.31
 Release:	6
@@ -44,8 +44,8 @@ ipac is a package which is designed to gather, summarize and nicely
 output the IP accounting data. ipac make summaries and graphs as ascii
 text and/or images with graphs.
 
-%description -l pl
-ipac to pakiet przeznaczony do zbierania, podliczania i ³adnego
+%description -l pl.UTF-8
+ipac to pakiet przeznaczony do zbierania, podliczania i Å‚adnego
 przedstawiania danych o ruchu IP. ipac tworzy zestawienia i wykresy
 jako tekst ASCII lub obrazki z wykresami.
 
