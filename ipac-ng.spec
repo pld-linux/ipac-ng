@@ -5,7 +5,7 @@
 %include	/usr/lib/rpm/macros.perl
 #
 Summary:	IP accounting package for Linux
-Summary(pl.UTF-8):   Pakiet zbierający informacje o ruchu IP
+Summary(pl.UTF-8):	Pakiet zbierający informacje o ruchu IP
 Name:		ipac-ng
 Version:	1.31
 Release:	6
