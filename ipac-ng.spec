@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_with	default_ipchains	# use ipchains as default accouting agent
 #
-%include	/usr/lib/rpm/macros.perl
 #
 Summary:	IP accounting package for Linux
 Summary(pl.UTF-8):	Pakiet zbierający informacje o ruchu IP
